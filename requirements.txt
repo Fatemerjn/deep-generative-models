@@ -1,0 +1,9 @@
+torch
+torchvision
+numpy
+matplotlib
+jupyter
+tensorboard
+scikit-learn
+notebook
+ipywidgets
