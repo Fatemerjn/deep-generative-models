@@ -1,0 +1,28 @@
+data:
+  name: mnist
+  root: data/mnist
+  batch_size: 128
+  num_workers: 4
+  shuffle: true
+  normalize: true
+
+model:
+  name: vae
+  latent_dim: 32
+  hidden_dims: [256, 512]
+
+optimizer:
+  optimizer: adam
+  learning_rate: 0.0002
+  betas: [0.9, 0.999]
+
+training:
+  epochs: 10
+  log_every: 100
+  eval_every: 1
+  precision: fp32
+  seed: 42
+
+output_dir: results/mnist_vae
+notes: Example configuration used by scripts/train.py
+
