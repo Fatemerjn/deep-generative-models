@@ -94,7 +94,8 @@ def run_training(
 
         val_metrics = evaluate(model, val_loader, device)
         elapsed = time.time() - start_time
-        summary = {"epoch": epoch + 1, "elapsed": elapsed, **logger.buffer, **val_metrics}
+        train_metrics = logger.averages()
+        summary = {"epoch": epoch + 1, "elapsed": elapsed, **train_metrics, **val_metrics}
         for hook in hooks:
             hook(epoch + 1, summary)
 
@@ -128,4 +129,3 @@ def _step(model: GenerativeModel, batch: Batch) -> StepOutput:
     """Run a training step. Kept separate for readability and testing."""
 
     return model.loss(batch)
-

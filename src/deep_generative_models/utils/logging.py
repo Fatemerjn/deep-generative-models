@@ -19,7 +19,7 @@ class MetricLogger:
             self.counts[key] += 1
 
     def flush(self, epoch: int, step: int) -> None:
-        averaged = {key: self.buffer[key] / max(self.counts[key], 1) for key in self.buffer}
+        averaged = self.averages()
         formatted = ", ".join(f"{key}: {value:.4f}" for key, value in averaged.items())
         print(f"[Epoch {epoch:03d} | Step {step:05d}] {formatted}")
 
@@ -27,3 +27,5 @@ class MetricLogger:
         self.buffer.clear()
         self.counts.clear()
 
+    def averages(self) -> Dict[str, float]:
+        return {key: self.buffer[key] / max(self.counts[key], 1) for key in self.buffer}
